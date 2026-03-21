@@ -5,6 +5,8 @@ import ee.armin_jaemaa.feeCalculator.entity.WeatherData;
 import ee.armin_jaemaa.feeCalculator.repository.WeatherDataRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -25,6 +27,12 @@ public class WeatherImportService {
     private static final String WEATHER_URL = "https://www.ilmateenistus.ee/ilma_andmed/xml/observations.php";
 
     private static final Set<String> TARGET_STATIONS = Set.of("Tallinn-Harku", "Tartu-Tõravere", "Pärnu");
+
+    @EventListener(ApplicationReadyEvent.class)
+    public void importInitialData() {
+        log.info("Starting initial weather data import");
+        fetchWeatherData();
+    }
 
     @Scheduled(cron = "${weather.import.cron:0 15 * * * *}")
     public void fetchWeatherData() {
