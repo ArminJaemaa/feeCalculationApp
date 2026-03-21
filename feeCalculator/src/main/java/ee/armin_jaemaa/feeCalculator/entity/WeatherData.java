@@ -24,5 +24,5 @@ public class WeatherData {
     private double temperature;
     private double windSpeed;
     private String weatherPhenomenon;
-    private LocalDateTime timeStamp;
+    private LocalDateTime timestamp;
 }

@@ -11,7 +11,7 @@ import java.util.List;
 @JacksonXmlRootElement(localName = "observations")
 public class WeatherResponseDTO {
     @JacksonXmlProperty(isAttribute = true)
-    private Long timeStamp;
+    private Long timestamp;
 
     @JacksonXmlElementWrapper(useWrapping = false)
     @JacksonXmlProperty(localName = "station")
