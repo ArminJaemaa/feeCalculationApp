@@ -8,7 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Data
+@Data //TODO: replace data with getter and setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "base_fee")

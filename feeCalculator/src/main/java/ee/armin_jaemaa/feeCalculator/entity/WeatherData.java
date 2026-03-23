@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 @Entity
-@Data
+@Data //TODO: replace data with getter and setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "weather_data")
