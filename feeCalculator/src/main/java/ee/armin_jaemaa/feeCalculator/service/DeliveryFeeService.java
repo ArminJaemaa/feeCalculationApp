@@ -32,7 +32,7 @@ public class DeliveryFeeService {
     }
 
     public double calculateExtraFees(City city, VehicleType vehicle) {
-        WeatherData weather = weatherDataRepository.findFirstByStationNameOrderByTimestampDesc(city.name())
+        WeatherData weather = weatherDataRepository.findFirstByStationNameOrderByTimestampDesc(city.getStationName())
                 .orElseThrow(() -> new RuntimeException("No weather data found for city " + city));
 
         double totalExtraFee = 0.0;
@@ -50,7 +50,7 @@ public class DeliveryFeeService {
 
         //add extra fee
         if (temperature < -10) return 1.0;
-        if (temperature >= 0) return 0.5;
+        if (temperature <= 0) return 0.5;
 
         return 0;
     }
