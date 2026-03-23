@@ -13,4 +13,13 @@ public enum City {
     City(String stationName) {
         this.stationName = stationName;
     }
+
+    public static City fromString(String value) {
+        for (City c : City.values()) {
+            if (c.name().equalsIgnoreCase(value)) {
+                return c;
+            }
+        }
+        throw new IllegalArgumentException("Unknown city: " + value);
+    }
 }

@@ -18,10 +18,13 @@ public class DeliveryFeeController {
 
     @GetMapping("/delivery-fee")
     public ResponseEntity<Double> getDeliveryFee(
-            @RequestParam  City city,
-            @RequestParam VehicleType vehicle){
+            @RequestParam  String city,
+            @RequestParam String vehicle){
 
-        double totalFee = deliveryFeeService.calculateTotalFee(city, vehicle);
+        City cityObj = City.fromString(city);
+        VehicleType vehicleObj = VehicleType.fromString(vehicle);
+
+        double totalFee = deliveryFeeService.calculateTotalFee(cityObj, vehicleObj);
         return ResponseEntity.ok(totalFee);
     }
 }
