@@ -20,8 +20,11 @@ public class ExceptionCatcher {
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 
+    //TODO: add excpetionhandler for baseFeeNotFound and illegalArgumentException
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorMessage> handleException(Exception ex) {
+        System.out.println(ex.getMessage());
         ErrorMessage error = new ErrorMessage(
                 "internal error",
                 LocalDateTime.now(),
