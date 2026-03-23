@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "base_fee")
 public class BaseFee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

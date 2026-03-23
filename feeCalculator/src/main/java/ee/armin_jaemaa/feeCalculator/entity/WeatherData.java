@@ -22,6 +22,7 @@ public class WeatherData {
     private String stationName;
     private String stationWMO;
     private double temperature;
+    //private char temperatureUnit;
     private double windSpeed;
     private String weatherPhenomenon;
     private LocalDateTime timestamp;
