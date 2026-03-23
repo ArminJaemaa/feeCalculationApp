@@ -3,8 +3,14 @@ package ee.armin_jaemaa.feeCalculator.entity;
 import ee.armin_jaemaa.feeCalculator.model.City;
 import ee.armin_jaemaa.feeCalculator.model.VehicleType;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class BaseFee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,4 +21,6 @@ public class BaseFee {
 
     @Enumerated(EnumType.STRING)
     private VehicleType vehicleType;
+
+    private Double fee;
 }
