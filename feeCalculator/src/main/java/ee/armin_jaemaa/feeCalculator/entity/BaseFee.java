@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Data //TODO: replace data with getter and setter
 @NoArgsConstructor
@@ -24,4 +26,6 @@ public class BaseFee {
     private VehicleType vehicleType;
 
     private Double fee;
+
+    private LocalDateTime timestamp;
 }

@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -32,13 +33,14 @@ public class BaseFeeController {
         newFee.setCity(requestDTO.getCity());
         newFee.setVehicleType(requestDTO.getVehicleType());
         newFee.setFee(requestDTO.getFee());
+        newFee.setTimestamp(LocalDateTime.now());
 
-        //check if already exists
-        boolean exists = baseFeeRepository.findByCityAndVehicleType(newFee.getCity(),
+        //check if fee already exists
+        /*boolean exists = baseFeeRepository.findByCityAndVehicleType(newFee.getCity(),
                 newFee.getVehicleType()).isPresent();
         if (exists){
             throw new IllegalArgumentException("fee already exists!");
-        }
+        } */
         return baseFeeRepository.save(newFee);
     }
 
@@ -49,19 +51,23 @@ public class BaseFeeController {
         if (newFeeValue == null || newFeeValue <= 0){
             throw new IllegalArgumentException("new fee must be positive and higher than zero!");
         }
-        return baseFeeRepository.findByCityAndVehicleType(city, vehicle)
-                .map(existingFee ->{
-                    existingFee.setFee(newFeeValue);
-                    return baseFeeRepository.save(existingFee);
-                })
+        LocalDateTime timestamp = LocalDateTime.now();
+         baseFeeRepository.findFirstByCityAndVehicleTypeAndTimestampLessThanEqualOrderByTimestampDesc(city, vehicle, timestamp)
                 .orElseThrow(()-> new BaseFeeNotFoundException(city, vehicle));
-        }
 
-    @DeleteMapping("/{city}-{vehicle}")
-    public void deleteFee(@PathVariable City city,
-                          @PathVariable VehicleType vehicle){
-        BaseFee feeToDelete = baseFeeRepository.findByCityAndVehicleType(city, vehicle)
-                .orElseThrow(()-> new BaseFeeNotFoundException(city, vehicle));
+        BaseFee historyEntry =new BaseFee();
+                historyEntry.setCity(city);
+                historyEntry.setVehicleType(vehicle);
+                historyEntry.setFee(newFeeValue);
+                historyEntry.setTimestamp(LocalDateTime.now());
+
+                return baseFeeRepository.save(historyEntry);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteFee(@PathVariable Long id){
+        BaseFee feeToDelete = baseFeeRepository.findById(id)
+                .orElseThrow(()-> new RuntimeException("No base fee found for id " + id));
         baseFeeRepository.delete(feeToDelete);
     }
 }
