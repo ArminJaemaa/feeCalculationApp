@@ -51,10 +51,17 @@ public class DeliveryFeeServiceTest {
         when(weatherDataRepository.findFirstByStationNameAndTimestampLessThanEqualOrderByTimestampDesc(eq("Tallinn-Harku"),any(LocalDateTime.class)))
                 .thenReturn(Optional.of(mockWeather));
 
-        VehicleForbiddenException exception = assertThrows(VehicleForbiddenException.class, () -> {
-            deliveryFeeService.calculateTotalFee(City.TALLINN, vehicle, LocalDateTime.now());
-        });
-        assertEquals("Usage of selected vehicle type is forbidden", exception.getMessage());
+        boolean shouldThrow = (vehicle == VehicleType.BIKE);
+
+        if (shouldThrow) {
+            VehicleForbiddenException exception = assertThrows(VehicleForbiddenException.class, () -> {
+                deliveryFeeService.calculateTotalFee(City.TALLINN, vehicle, LocalDateTime.now());
+            });
+            assertEquals("Usage of selected vehicle type is forbidden", exception.getMessage());
+        }else{
+            Double result = deliveryFeeService.calculateTotalFee(City.TALLINN, vehicle, LocalDateTime.now());
+            assertEquals(3.0, result, "Scooters should not be charged or forbidden by wind speed.");
+        }
     }
 
     @Test
