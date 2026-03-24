@@ -10,6 +10,10 @@ import java.time.LocalDateTime;
 @RestControllerAdvice
 public class ExceptionCatcher {
 
+    /**
+     * @param ex vehicle forbidden exception based on weather conditions
+     * @return return error when vehicle type does not match weather conditions
+     */
     @ExceptionHandler(VehicleForbiddenException.class)
     public ResponseEntity<ErrorMessage> handleVehicleForbiddenException(VehicleForbiddenException ex) {
         ErrorMessage error = new ErrorMessage(

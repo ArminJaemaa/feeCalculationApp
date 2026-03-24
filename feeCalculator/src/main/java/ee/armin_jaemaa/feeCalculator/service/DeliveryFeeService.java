@@ -20,6 +20,12 @@ public class DeliveryFeeService {
     private final WeatherDataRepository weatherDataRepository;
     private final BaseFeeRepository baseFeeRepository;
 
+    /**
+     * @param city requested delivery city
+     * @param vehicle requested vehicle used
+     * @param requestedTime requested time of delivery
+     * @return total fee based on city, vehicle and time. extra fees are added if needed
+     */
     public double calculateTotalFee(City city, VehicleType vehicle, LocalDateTime requestedTime) {
 
         LocalDateTime effectiveTime = (requestedTime != null) ? requestedTime : LocalDateTime.now();

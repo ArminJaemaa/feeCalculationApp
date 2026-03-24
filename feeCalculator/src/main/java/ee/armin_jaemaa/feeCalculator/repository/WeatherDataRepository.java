@@ -10,6 +10,11 @@ import java.util.Optional;
 @Repository
 public interface WeatherDataRepository extends JpaRepository<WeatherData, Long> {
 
+    /**
+     * @param stationName requested city station name
+     * @param timestamp requested time
+     * @return latest station in correlation with requested time
+     */
     Optional<WeatherData> findFirstByStationNameAndTimestampLessThanEqualOrderByTimestampDesc(
             String stationName,
             LocalDateTime timestamp

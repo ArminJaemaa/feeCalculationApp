@@ -20,11 +20,18 @@ public class BaseFeeController {
 
     private final BaseFeeRepository baseFeeRepository;
 
+    /**
+     * @return returns all base fees
+     */
     @GetMapping
     public List<BaseFee> getAllFees(){
         return baseFeeRepository.findAll();
     }
 
+    /**
+     * @param requestDTO data transfer object to create a base fee (city and vehicle)
+     * @return adds new base fee combination with requested city and vehicle type
+     */
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public BaseFee addFee(@RequestBody BaseFeeRequestDTO requestDTO){
@@ -44,6 +51,12 @@ public class BaseFeeController {
         return baseFeeRepository.save(newFee);
     }
 
+    /**
+     * @param city requested city to be changed
+     * @param vehicle requested vehicle type to be changed
+     * @param newFeeValue new base fee for city and vehicle type
+     * @return creates new insertion with requested combination with new datetime
+     */
     @PatchMapping("/{city}-{vehicle}")
     public BaseFee updateFee(@PathVariable City city,
                              @PathVariable VehicleType vehicle,
@@ -64,6 +77,9 @@ public class BaseFeeController {
                 return baseFeeRepository.save(historyEntry);
     }
 
+    /**
+     * @param id fee id to be deleted
+     */
     @DeleteMapping("/{id}")
     public void deleteFee(@PathVariable Long id){
         BaseFee feeToDelete = baseFeeRepository.findById(id)

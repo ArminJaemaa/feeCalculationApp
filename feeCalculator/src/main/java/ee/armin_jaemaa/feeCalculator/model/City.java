@@ -14,6 +14,11 @@ public enum City {
         this.stationName = stationName;
     }
 
+    /**
+     * city type can be case-insensitive
+     * @param value city where station is located
+     * @return city station name
+     */
     public static City fromString(String value) {
         for (City c : City.values()) {
             if (c.name().equalsIgnoreCase(value)) {

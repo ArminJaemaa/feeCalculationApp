@@ -13,6 +13,12 @@ import java.util.Optional;
 @Repository
 public interface BaseFeeRepository extends JpaRepository<BaseFee, Long> {
 
+    /**
+     * @param city requested delivery city
+     * @param vehicleType requested delivery vehicle type
+     * @param timestamp requested time
+     * @return latest base fee for city,vehicle,time combination
+     */
     Optional<BaseFee> findFirstByCityAndVehicleTypeAndTimestampLessThanEqualOrderByTimestampDesc(
             City city,
             VehicleType vehicleType,
