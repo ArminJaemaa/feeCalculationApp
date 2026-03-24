@@ -7,6 +7,9 @@ import lombok.Data;
 
 import java.util.List;
 
+/**
+ * weather DTO requested from weather service provider
+ */
 @Data
 @JacksonXmlRootElement(localName = "observations")
 public class WeatherResponseDTO {

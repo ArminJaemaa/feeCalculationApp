@@ -19,6 +19,12 @@ import java.time.LocalDateTime;
 public class DeliveryFeeController implements DeliveryFeeApi {
     private final DeliveryFeeService deliveryFeeService;
 
+    /**
+     * @param city requested delivery city
+     * @param vehicle requested delivery vehicle type
+     * @param timestamp requested delivery time (format yyyy-mmm-dd hh:mm)
+     * @return fee based on inserted params
+     */
     @GetMapping("/delivery-fee")
     public ResponseEntity<Double> getDeliveryFee(
             @RequestParam  String city,

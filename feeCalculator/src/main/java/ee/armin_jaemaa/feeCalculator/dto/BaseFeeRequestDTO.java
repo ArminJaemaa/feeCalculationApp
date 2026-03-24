@@ -6,6 +6,9 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.Data;
 
+/**
+ * base fee DTO for data insertion
+ */
 @Data
 public class BaseFeeRequestDTO {
     @NotNull
