@@ -11,6 +11,8 @@ import ee.armin_jaemaa.feeCalculator.repository.WeatherDataRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 @Service
 @RequiredArgsConstructor
 public class DeliveryFeeService {
@@ -18,21 +20,24 @@ public class DeliveryFeeService {
     private final WeatherDataRepository weatherDataRepository;
     private final BaseFeeRepository baseFeeRepository;
 
-    public double calculateTotalFee(City city, VehicleType vehicle) {
+    public double calculateTotalFee(City city, VehicleType vehicle, LocalDateTime requestedTime) {
 
-        double baseDeliveryFee = getBaseFee(city, vehicle);
-        double extraDeliveryFee = calculateExtraFees(city, vehicle);
+        LocalDateTime effectiveTime = (requestedTime != null) ? requestedTime : LocalDateTime.now();
+
+        double baseDeliveryFee = getBaseFee(city, vehicle, effectiveTime);
+        double extraDeliveryFee = calculateExtraFees(city, vehicle, effectiveTime);
         return baseDeliveryFee + extraDeliveryFee;
     }
 
-    public double getBaseFee(City city, VehicleType vehicle) {
-        return  baseFeeRepository.findByCityAndVehicleType(city, vehicle)
+    public double getBaseFee(City city, VehicleType vehicle, LocalDateTime requestedTime) {
+
+        return baseFeeRepository.findFirstByCityAndVehicleTypeAndTimestampLessThanEqualOrderByTimestampDesc(city, vehicle, requestedTime)
                 .map(BaseFee::getFee)
                 .orElseThrow(() -> new BaseFeeNotFoundException(city, vehicle));
     }
 
-    public double calculateExtraFees(City city, VehicleType vehicle) {
-        WeatherData weather = weatherDataRepository.findFirstByStationNameOrderByTimestampDesc(city.getStationName())
+    public double calculateExtraFees(City city, VehicleType vehicle, LocalDateTime requestedTime) {
+        WeatherData weather = weatherDataRepository.findFirstByStationNameAndTimestampLessThanEqualOrderByTimestampDesc(city.getStationName(), requestedTime)
                 .orElseThrow(() -> new RuntimeException("No weather data found for city " + city));
 
         double totalExtraFee = 0.0;

@@ -10,6 +10,7 @@ import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Slf4j
@@ -21,24 +22,25 @@ public class DataSeedService {
 
     @EventListener(ApplicationReadyEvent.class)
     public void seedBaseFees() {
+        LocalDateTime dateTime = LocalDateTime.now();
         //baseFeeRepository.deleteAll();
         if  (baseFeeRepository.count() == 0) {
             log.info("Seeding initial fee data");
             baseFeeRepository.saveAll(List.of(
                     //TALLINN
-                    new BaseFee(null, City.TALLINN, VehicleType.CAR, 4.0),
-                    new BaseFee(null, City.TALLINN, VehicleType.SCOOTER, 3.5),
-                    new BaseFee(null, City.TALLINN, VehicleType.BIKE, 3.0),
+                    new BaseFee(null, City.TALLINN, VehicleType.CAR, 4.0, dateTime),
+                    new BaseFee(null, City.TALLINN, VehicleType.SCOOTER, 3.5, dateTime),
+                    new BaseFee(null, City.TALLINN, VehicleType.BIKE, 3.0, dateTime),
 
                     //TARTU
-                    new BaseFee(null, City.TARTU, VehicleType.CAR, 3.5),
-                    new BaseFee(null, City.TARTU, VehicleType.SCOOTER, 3.0),
-                    new BaseFee(null, City.TARTU, VehicleType.BIKE, 2.5),
+                    new BaseFee(null, City.TARTU, VehicleType.CAR, 3.5, dateTime),
+                    new BaseFee(null, City.TARTU, VehicleType.SCOOTER, 3.0, dateTime),
+                    new BaseFee(null, City.TARTU, VehicleType.BIKE, 2.5,  dateTime),
 
                     //PÄRNU
-                    new BaseFee(null, City.PÄRNU, VehicleType.CAR, 3.0),
-                    new BaseFee(null, City.PÄRNU, VehicleType.SCOOTER, 2.5),
-                    new BaseFee(null, City.PÄRNU, VehicleType.BIKE, 2.0)
+                    new BaseFee(null, City.PÄRNU, VehicleType.CAR, 3.0, dateTime),
+                    new BaseFee(null, City.PÄRNU, VehicleType.SCOOTER, 2.5, dateTime),
+                    new BaseFee(null, City.PÄRNU, VehicleType.BIKE, 2.0, dateTime)
             ));
         }
     }
