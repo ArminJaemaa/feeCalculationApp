@@ -64,13 +64,10 @@ public class BaseFeeController {
                 return baseFeeRepository.save(historyEntry);
     }
 
-    //TODO: delete functionality has to delete by id!!
-    @DeleteMapping("/{city}-{vehicle}")
-    public void deleteFee(@PathVariable City city,
-                          @PathVariable VehicleType vehicle,
-                          @RequestBody LocalDateTime timestamp){
-        BaseFee feeToDelete = baseFeeRepository.findFirstByCityAndVehicleTypeAndTimestampLessThanEqualOrderByTimestampDesc(city, vehicle, timestamp)
-                .orElseThrow(()-> new BaseFeeNotFoundException(city, vehicle));
+    @DeleteMapping("/{id}")
+    public void deleteFee(@PathVariable Long id){
+        BaseFee feeToDelete = baseFeeRepository.findById(id)
+                .orElseThrow(()-> new RuntimeException("No base fee found for id " + id));
         baseFeeRepository.delete(feeToDelete);
     }
 }
