@@ -19,8 +19,8 @@ public interface BaseFeeApi {
 
     @Operation(summary = "Update a fee", description = "Updates the price for a specific city and vehicle combination")
     BaseFee updateFee(
-            @Parameter(description = "The city to update", example = "Tallinn") City city,
-            @Parameter(description = "The vehicle to update", example = "Car") VehicleType vehicle,
+            @Parameter(description = "The city to update", example = "Tallinn") String city,
+            @Parameter(description = "The vehicle to update", example = "Car") String vehicle,
             @RequestBody Double newPrice
     );
 }

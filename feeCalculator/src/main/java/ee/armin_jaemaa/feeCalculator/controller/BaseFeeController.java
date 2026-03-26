@@ -58,19 +58,23 @@ public class BaseFeeController implements BaseFeeApi {
      * @return creates new insertion with requested combination with new datetime
      */
     @PatchMapping("/{city}-{vehicle}")
-    public BaseFee updateFee(@PathVariable City city,
-                             @PathVariable VehicleType vehicle,
+    public BaseFee updateFee(@PathVariable String city,
+                             @PathVariable String vehicle,
                              @RequestBody Double newFeeValue){
+
+        City cityObj = City.fromString(city);
+        VehicleType vehicleObj = VehicleType.fromString(vehicle);
+
         if (newFeeValue == null || newFeeValue <= 0){
             throw new IllegalArgumentException("new fee must be positive and higher than zero!");
         }
         LocalDateTime timestamp = LocalDateTime.now();
-         baseFeeRepository.findFirstByCityAndVehicleTypeAndTimestampLessThanEqualOrderByTimestampDesc(city, vehicle, timestamp)
-                .orElseThrow(()-> new BaseFeeNotFoundException(city, vehicle));
+         baseFeeRepository.findFirstByCityAndVehicleTypeAndTimestampLessThanEqualOrderByTimestampDesc(cityObj, vehicleObj, timestamp)
+                .orElseThrow(()-> new BaseFeeNotFoundException(cityObj, vehicleObj));
 
         BaseFee historyEntry =new BaseFee();
-                historyEntry.setCity(city);
-                historyEntry.setVehicleType(vehicle);
+                historyEntry.setCity(cityObj);
+                historyEntry.setVehicleType(vehicleObj);
                 historyEntry.setFee(newFeeValue);
                 historyEntry.setTimestamp(LocalDateTime.now());
 
