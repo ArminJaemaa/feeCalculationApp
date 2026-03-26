@@ -3,7 +3,10 @@ package ee.armin_jaemaa.feeCalculator.entity;
 import ee.armin_jaemaa.feeCalculator.model.City;
 import ee.armin_jaemaa.feeCalculator.model.VehicleType;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
