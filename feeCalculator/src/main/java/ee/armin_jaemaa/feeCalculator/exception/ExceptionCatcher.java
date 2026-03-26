@@ -24,7 +24,30 @@ public class ExceptionCatcher {
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 
-    //TODO: add excpetionhandler for baseFeeNotFound and illegalArgumentException
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<ErrorMessage> handleIllegalArgumentException(IllegalArgumentException ex) {
+        ErrorMessage error = new ErrorMessage(
+                ex.getMessage(),
+                LocalDateTime.now(),
+                HttpStatus.BAD_REQUEST.value()
+        );
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+    }
+
+    /**
+     *
+     * @param ex base fee not found exception based on City and vehicle
+     * @return new base fee not found error
+     */
+    @ExceptionHandler(BaseFeeNotFoundException.class)
+    public ResponseEntity<ErrorMessage> handleBaseFeeNotFoundException(BaseFeeNotFoundException ex) {
+        ErrorMessage error = new ErrorMessage(
+                ex.getMessage(),
+                LocalDateTime.now(),
+                HttpStatus.NOT_FOUND.value()
+        );
+        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+    }
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorMessage> handleException(Exception ex) {
