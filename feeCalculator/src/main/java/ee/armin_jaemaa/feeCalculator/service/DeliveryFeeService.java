@@ -50,7 +50,9 @@ public class DeliveryFeeService {
 
         if (vehicle == VehicleType.SCOOTER || vehicle == VehicleType.BIKE) {
             totalExtraFee += getTemperatureExtraFee(weather.getTemperature());
-            totalExtraFee += getWindSpeedExtraFee(weather.getWindSpeed());
+            if (vehicle == VehicleType.BIKE) {
+                totalExtraFee += getWindSpeedExtraFee(weather.getWindSpeed());
+            }
             totalExtraFee += getPhenomenonExtraFee(weather.getWeatherPhenomenon());
         }
         return totalExtraFee;
@@ -72,7 +74,7 @@ public class DeliveryFeeService {
         if (windSpeed > 20) throw new VehicleForbiddenException();
 
         //add extra fee
-        if  (windSpeed > 10 && windSpeed < 20) return 0.5;
+        if  (windSpeed >= 10 && windSpeed < 20) return 0.5;
 
         return 0;
     }
