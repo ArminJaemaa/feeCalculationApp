@@ -1,5 +1,22 @@
 # Delivery fee calculator
 Spring boot application that calculates delivery fee for couriers based on business rules and up to date weather conditions.
+
+<details>
+  <summary><b>Table of Contents</b></summary>
+  
+  - [Features](#dart-features)
+  - [Technologies used](#computer-technologies-used)
+  - [Business rules](#heavy_exclamation_mark-business-rules)
+  - [Project structure](#scroll-project-structure)
+  - [Database schema](#books-database-schema)
+  - [How to run locally](#rocket-how-to-run-locally)
+  - [API Documentation](#clipboard-api-documentation)
+  - [Tests](#wrench-tests)
+  - [License](#licence)
+</details>
+
+---
+
 ## :dart: Features
 - **weather import** - Scheduled fetch for weather data from Estonian Environment Agency
 - **Weather based calculation** - Implements business rules for temperature, wind speed, and phenomena and latest weather to calculate courier fee
