@@ -32,7 +32,7 @@ Spring boot application that calculates delivery fee for couriers based on busin
 ---
 ## :books: Database schema
 This application uses H2 in-memory database.
-![Database Schema](https://raw.githubusercontent.com/ArminJaemaa/feeCalculationApp/main/media/database_structure.png)
+![Database Schema](./media/database_structure.png)
 >- [H2 Database console](http://localhost:8080/h2-console "H2 console")
 >  (`http://localhost:8080/h2-console`)
 >    - JDBC URL: `jdbc:h2:mem:testdb`
