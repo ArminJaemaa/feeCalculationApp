@@ -71,4 +71,4 @@ response:
 ```
 ---
 ## Licence
-[MIT](./LICENCE)
+[MIT](./LICENSE)
