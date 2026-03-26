@@ -4,7 +4,6 @@ import ee.armin_jaemaa.feeCalculator.entity.BaseFee;
 import ee.armin_jaemaa.feeCalculator.model.City;
 import ee.armin_jaemaa.feeCalculator.model.VehicleType;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
