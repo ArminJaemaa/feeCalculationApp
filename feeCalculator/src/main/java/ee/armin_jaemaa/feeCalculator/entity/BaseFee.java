@@ -3,14 +3,13 @@ package ee.armin_jaemaa.feeCalculator.entity;
 import ee.armin_jaemaa.feeCalculator.model.City;
 import ee.armin_jaemaa.feeCalculator.model.VehicleType;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Entity
-@Data //TODO: replace data with getter and setter
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "base_fee")
