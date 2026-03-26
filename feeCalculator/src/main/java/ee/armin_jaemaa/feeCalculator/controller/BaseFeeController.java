@@ -16,7 +16,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/base-fees")
-public class BaseFeeController {
+public class BaseFeeController implements BaseFeeApi {
 
     private final BaseFeeRepository baseFeeRepository;
 
