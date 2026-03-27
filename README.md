@@ -69,6 +69,7 @@ This application uses H2 in-memory database.
 ## :clipboard: API Documentation
 - [API documentation](http://localhost:8080/swagger-ui/index.html "swagger UI")
   (`http://localhost:8080/swagger-ui/index.html`)
+![API documentation](https://github.com/user-attachments/assets/d6a59dd0-4a01-4c3a-8f26-dec95be3319e)
 ### Example request/response
 
 ```
