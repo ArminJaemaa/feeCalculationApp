@@ -88,5 +88,9 @@ response:
 ./mvnw test
 ```
 ---
+## :chart_with_upwards_trend: Future enhancements
+- Business rules can be added into separet database table to change calculation rules with CRUD interface
+- "Past fees" table can be made to database to save fee calculations for history
+---
 ## Licence
 [MIT](./LICENSE)
